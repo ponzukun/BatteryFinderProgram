@@ -19,7 +19,7 @@ for(let i = 0; i < camera.length; i++) {
 
 View.createSelect("brand", cameraBrands, 1, config.inputCon);
 View.createSelect("model", cameraModels, 2, config.inputCon);
-// View.createInputNum("accessory power consumption", "apc", 0, 100, 3, config.inputCon);
+View.createInputNum("accessory power consumption", "apc", 0, 100, 3, config.inputCon);
 
 function initializeApp() {
     let target = document.getElementById("target");
