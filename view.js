@@ -15,8 +15,16 @@ export class View {
             let option = document.createElement("option");
             option.setAttribute("value", values[i]);
             option.innerHTML = values[i];
-            document.getElementById(name + "-select").append(option);
+            document.getElementById(`${name}-select`).append(option);
         }
+
+        const selectElement = document.querySelector(`#${name}-select`);
+        selectElement.addEventListener('change', (event) => {
+            // const result = document.querySelector('.result');
+            // result.textContent = `You like ${event.target.value}`;
+            console.log(event.target.value);
+        });
+
     }
 
     static createInputNum(name, idName, min, max, count, target) {
@@ -35,15 +43,15 @@ export class View {
         div.innerHTML = `
         <p>Step${count}: Choose your battery</p>
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active">
-              Cras justo odio
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-            <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-            <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-            <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
         </div>
         `
         target.append(div);
     }
 }
+{/* <a href="#" class="list-group-item list-group-item-action active">
+Cras justo odio
+</a>
+<a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+<a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+<a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+<a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a> */}
