@@ -5,7 +5,7 @@ export class View {
         <label for="${name}-select">Step${count}: Select your ${name}</label>
         <div>
             <select name="${name}s" id="${name}-select">
-                <option value="">--Please choose an option--</option>
+                <option value="">--Please choose a ${name}--</option>
             </select>
         </div>
         `
