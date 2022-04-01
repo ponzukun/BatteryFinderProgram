@@ -1,5 +1,6 @@
 export class View {
     static createSelect(name, values, count, target) {
+        console.log(target);
         let div = document.createElement("div");
         div.innerHTML = `
         <label for="${name}-select">Step${count}: Select your ${name}</label>
@@ -9,13 +10,14 @@ export class View {
             </select>
         </div>
         `
+        target.append(div);
+
         for(let i = 0; i < values.length; i++) {
             let option = document.createElement("option");
             option.setAttribute("value", values[i]);
+            option.innerHTML = values[i];
             document.getElementById(name + "-select").append(option);
         }
-        
-        target.append(div);
     }
 
     static createInputNum(name, idName, min, max, count, target) {
@@ -34,4 +36,10 @@ export class View {
         <option value="cat">Cat</option>
     </select>
 </div>
-</div> */}
+</div> 
+<div>
+    <label for="apc-input">Step3: Input accessory power consumption</label>
+    <div>
+        <input type="number" id="apc-input" name="apc-input" min="0" max="100">
+    </div>
+</div>*/}

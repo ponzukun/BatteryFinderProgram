@@ -1,20 +1,25 @@
-import { camera } from "model.js";
-import { View } from "view.js";
+import { camera } from "/model.js";
+import { View } from "/view.js";
+
+initializeApp();
 
 const config = {
-    inputCon : document.getElementById("inuptContainer"),
+    inputCon : document.getElementById("inputContainer"),
     chooseCon : document.getElementById("chooseContainer")
 }
 
 const cameraBrands = [];
-for(let i = 0; i < camera.length; i++) cameraBrands.push(camera[i].brand);
+for(let i = 0; i < camera.length; i++) {
+    if(!cameraBrands.includes(camera[i].brand)) cameraBrands.push(camera[i].brand);
+}
 const cameraModels = [];
-for(let i = 0; i < camera.length; i++) cameraModels.push(camera[i].model);
+for(let i = 0; i < camera.length; i++) {
+    if(!cameraModels.includes(camera[i].model)) cameraModels.push(camera[i].model); 
+} 
 
-initializeApp();
-View.createSelect("brand", cameraBrands, 1, inputCon);
-View.createSelect("model", cameraModels, 2, inputCon);
-View.createInputNum("accessory power consumption", "apc", 0, 100, 3, inputCon);
+View.createSelect("brand", cameraBrands, 1, config.inputCon);
+View.createSelect("model", cameraModels, 2, config.inputCon);
+// View.createInputNum("accessory power consumption", "apc", 0, 100, 3, config.inputCon);
 
 function initializeApp() {
     let target = document.getElementById("target");
