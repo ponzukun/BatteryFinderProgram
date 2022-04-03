@@ -7,10 +7,10 @@ function initializeApp() {
         <div class="bg-primary d-flex justify-content-center">
             <h1 class="text-white p-1">Battery Finder Program</h1>
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center">
-            <div id="inputContainer" class="col-7">
+        <div class="d-flex flex-column justify-content-center align-items-center mt-2">
+            <div id="inputContainer" class="col-10">
             </div>
-            <div id="chooseContainer" class="col-7">
+            <div id="chooseContainer" class="col-10">
             </div>
         </div>
     `

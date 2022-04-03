@@ -1,3 +1,8 @@
+import { Controller } from "/controller.js";
+import { camera } from "/model.js";
+import { battery } from "/model.js";
+
+
 export class View {
     static createSelect(name, values, count, target) {
         let div = document.createElement("div");
@@ -19,10 +24,10 @@ export class View {
         }
 
         const selectElement = document.querySelector(`#${name}-select`);
-        selectElement.addEventListener('change', (event) => {
+        selectElement.addEventListener('change', () => {
             // const result = document.querySelector('.result');
             // result.textContent = `You like ${event.target.value}`;
-            console.log(event.target.value);
+            console.log(Controller.getApplicableBatteryList());
         });
 
     }

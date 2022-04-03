@@ -1,0 +1,18 @@
+h1 {
+    font-size: 2rem;
+}
+
+.mobile-font-size {
+    font-size: 3rem;
+}
+
+/* ノートパソコンのレイアウト */
+@media (min-width: 992px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .mobile-font-size {
+        font-size: 1rem;;
+    }
+} 
