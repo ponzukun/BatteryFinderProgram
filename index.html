@@ -15,9 +15,32 @@
                 <h1 class="text-white p-1">Battery Finder Program</h1>
             </div>
             <div class="d-flex flex-column justify-content-center align-items-center mt-2">
-                <div id="inputContainer" class="col-10">
-                </div>
-                <div id="chooseContainer" class="col-10">
+                <div class="col-md-10 col-12">
+                    <div>
+                        <label for="brand-select">Step1: Select your brand</label>
+                        <div>
+                            <select name="brands" id="brand-select">
+                                <option value="">--Please choose a brand--</option>
+                            </select>
+                        </div>            
+                    </div>
+                    <div>
+                        <label for="model-select">Step2: Select your model</label>
+                        <div>
+                            <select name="models" id="model-select">
+                                <option value="">--Please choose a model--</option>
+                            </select>
+                        </div>            
+                    </div>
+                    <div>
+                        <label for="apc-input">Step3: Input accessory power consumption</label>
+                        <div>
+                            <input type="number" id="apc-input" name="apc-input" min="0" max="100">
+                        </div>                
+                    </div>
+                    <div id="choose-container">
+                        <p>Step4: Choose your battery</p>
+                    </div>
                 </div>
             </div>    
         </div>
