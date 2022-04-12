@@ -1,22 +1,6 @@
 import { camera } from "/model.js";
 import { View } from "/view.js";
 
-function initializeApp() {
-    let target = document.getElementById("target");
-    target.innerHTML = `
-        <div class="bg-primary d-flex justify-content-center">
-            <h1 class="text-white p-1">Battery Finder Program</h1>
-        </div>
-        <div class="d-flex flex-column justify-content-center align-items-center mt-2">
-            <div id="inputContainer" class="col-10">
-            </div>
-            <div id="chooseContainer" class="col-10">
-            </div>
-        </div>
-    `
-}
-initializeApp();
-
 const config = {
     inputCon : document.getElementById("inputContainer"),
     chooseCon : document.getElementById("chooseContainer")
