@@ -1,14 +1,14 @@
 import { Controller } from "/controller.js";
-import { camera } from "/model.js";
+import { cameras } from "/model.js";
 import { battery } from "/model.js";
 
 
 export class View {
-    static createSelectBrand(values) {
-        for(let i = 0; i < values.length; i++) {
+    static createSelectBrand(brands) {
+        for (let brand of brands) {
             let option = document.createElement("option");
-            option.setAttribute("value", values[i]);
-            option.innerHTML = values[i];
+            option.setAttribute("value", brand);
+            option.innerHTML = brand;
             document.getElementById("brand-select").append(option);
         }
     }

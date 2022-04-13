@@ -1,21 +1,17 @@
-import { camera } from "/model.js";
+import { cameras } from "/model.js";
 import { View } from "/view.js";
 import { Camera } from "/camera.js";
-import { Battery } from "/battery.js";
+// import { Battery } from "/battery.js";
 
 const config = {
     brandSelect : document.getElementById("brand-select"),
     chooseCon : document.getElementById("choose-container")
 }
 
-const cameraBrands = [];
-for(let i = 0; i < camera.length; i++) {
-    if(!cameraBrands.includes(camera[i].brand)) cameraBrands.push(camera[i].brand);
-}
-const cameraModels = [];
-for(let i = 0; i < camera.length; i++) {
-    if(!cameraModels.includes(camera[i].model)) cameraModels.push(camera[i].model); 
-} 
+const cameraObjects = cameras.map(camera => new Camera(camera.brand, camera.model, camera.powerConsumptionWh));
+
+const cameraBrands = new Set();
+cameraObjects.forEach(camera => { cameraBrands.add(camera.brand); });
 
 View.createSelectBrand(cameraBrands);
 View.createListGroup(config.chooseCon);

@@ -78,7 +78,7 @@ export const battery =
     }]
 ;
 
-export const camera =
+export const cameras =
     [{
         "brand": "Cakon",
         "model": "ABC 3000M",
