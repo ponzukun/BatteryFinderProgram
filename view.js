@@ -1,27 +1,22 @@
-import { Controller } from "/controller.js";
-import { cameras } from "/model.js";
-import { battery } from "/model.js";
-
+import { config } from "/config.js";
+import { cameras } from "/camera.js";
 
 export class View {
     static createSelectBrand(brands) {
-        let brandSelect = document.getElementById("brand-select");
-
         for (let brand of brands) {
             let option = document.createElement("option");
             option.setAttribute("value", brand);
             option.innerHTML = brand;
-            brandSelect.append(option);
+            config.brandSelect.append(option);
         }
 
-        brandSelect.addEventListener("change", (event) => {
+        config.brandSelect.addEventListener("change", (event) => {
             this.createSelectModel(event.target.value);
         });
     }
 
     static createSelectModel(brand) {
-        let modelSelect = document.getElementById("model-select");
-        modelSelect.innerHTML = `
+        config.modelSelect.innerHTML = `
             <option value="">--Please choose a model--</option>
         `;
 
@@ -34,17 +29,20 @@ export class View {
             let option = document.createElement("option");
             option.setAttribute("value", model);
             option.innerHTML = model;
-            modelSelect.append(option);
+            config.modelSelect.append(option);
         }
     }
 
-    static createListGroup(target) {
-        let div = document.createElement("div");
-        div.innerHTML = `
-        <div class="list-group">
-        </div>
-        `
-        target.append(div);
+    static getApplicableBatteryList(cameraPowerConsumptionWh, batteryList) {
+        let applicableBatteryList = [];
+        for(let i = 0; i < batteryList.length; i++) {
+            let curr = batteryList[i]
+            let batteryPowerConsumptionWh = getPowerConsumptionWh(curr.endVoltage, curr.maxDraw);
+            if(cameraPowerConsumptionWh <= batteryPowerConsumptionWh) {
+                applicableBatteryList.push(curr);
+            }
+        }
+        return applicableBatteryList;
     }
 }
 {/* <a href="#" class="list-group-item list-group-item-action active">
