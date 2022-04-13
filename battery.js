@@ -100,3 +100,6 @@ export const batteries = [
         "endVoltage": 12,
     }
 ];
+
+export const batteryObjects = batteries.map(battery => 
+    new Battery(battery.batteryName, battery.capacityAh, battery.voltage, battery.maxDraw, battery.endVoltage));
