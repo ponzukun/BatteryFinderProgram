@@ -1,5 +1,7 @@
 import { camera } from "/model.js";
 import { View } from "/view.js";
+import { Camera } from "/camera.js";
+import { Battery } from "/battery.js";
 
 const config = {
     brandSelect : document.getElementById("brand-select"),
