@@ -85,6 +85,3 @@ export const cameras = [
 ];
 
 export const cameraObjects = cameras.map(camera => new Camera(camera.brand, camera.model, camera.powerConsumptionWh));
-
-export const cameraBrands = new Set();
-cameraObjects.forEach(camera => { cameraBrands.add(camera.brand); });

@@ -1,8 +1,7 @@
-import { cameraBrands } from "/camera.js";
 import { View } from "/view.js";
 import { config } from "/config.js";
 
-View.createSelectBrand(cameraBrands);
+View.createSelectBrand();
 
 config.brandSelect.addEventListener("change", (event) => {
     config.batteryList.innerHTML = "";

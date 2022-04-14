@@ -1,11 +1,14 @@
 import { config } from "/config.js";
-import { cameras } from "/camera.js";
 import { cameraObjects } from "/camera.js";
 import { batteryObjects } from "./battery.js";
 
 export class View {
-    static createSelectBrand(brands) {
-        for (let brand of brands) {
+    static createSelectBrand() {
+        // ブランド名の重複を防ぐ
+        const cameraBrands = new Set();
+        cameraObjects.forEach(camera => { cameraBrands.add(camera.brand); });
+
+        for (let brand of cameraBrands) {
             let option = document.createElement("option");
             option.setAttribute("value", brand);
             option.innerHTML = brand;
@@ -14,8 +17,9 @@ export class View {
     }
 
     static createSelectModel(brand) {
+        // モデル名の重複を防ぐ
         const cameraModels = new Set();
-        cameras.forEach(camera => { 
+        cameraObjects.forEach(camera => { 
             if(brand === camera.brand) cameraModels.add(camera.model);
         });
 
@@ -28,18 +32,17 @@ export class View {
     }
 
     static createListBattery(brand, model, apc) {
-        let applicableBatteryList = [];
-
-        // カメラを取得
+        // 選択されているカメラを取得
         let cameraObj;
         cameraObjects.forEach(camera => {
             if(camera.brand == brand && camera.model == model) {
                 cameraObj = camera;
             }
         });
-
+        
+        // 有効なバッテリーを取得
+        let applicableBatteryList = [];
         let cameraApcPower = Number(cameraObj.powerConsumptionWh) + Number(apc);
-
         batteryObjects.forEach(battery => {
             if(cameraApcPower <= battery.getPowerConsumptionWh()) {
                 if(0 < battery.getBatteryLifeH(cameraApcPower)) {
@@ -48,12 +51,14 @@ export class View {
             }
         });
 
+        // バッテリーをアルファベット順（昇順）にソート
         applicableBatteryList = applicableBatteryList.sort( (x, y) => {
             if (x.batteryName < y.batteryName) {return -1;}
             if (x.batteryName > y.batteryName) {return 1;}
             return 0;
         });
 
+        // 有効な各バッテリーを表示
         applicableBatteryList.forEach(battery => {
             let listItem = document.createElement("a");
             listItem.setAttribute("href", "#");
