@@ -15,8 +15,8 @@ export class Battery {
         return this.voltage * this.capacityAh;
     }
 
-    getBatteryLifeH() {
-        return this.powerConsumptionWh() / this.powerCapacityWh();
+    getBatteryLifeH(power) {
+        return (this.getPowerCapacityWh() / power).toFixed(1);
     }
 
 }

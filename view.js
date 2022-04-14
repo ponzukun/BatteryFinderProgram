@@ -11,16 +11,6 @@ export class View {
             option.innerHTML = brand;
             config.brandSelect.append(option);
         }
-
-        config.brandSelect.addEventListener("change", (event) => {
-            config.batteryList.innerHTML = "";
-            config.modelSelect.innerHTML = `
-                <option value="">--Please choose a model--</option>
-            `;    
-            if(event.target.value !== "") {
-                this.createSelectModel(event.target.value);
-            }
-        });
     }
 
     static createSelectModel(brand) {
@@ -35,17 +25,11 @@ export class View {
             option.innerHTML = model;
             config.modelSelect.append(option);
         }
-
-        config.modelSelect.addEventListener("change", (event) => {
-            config.batteryList.innerHTML = "";
-            if(event.target.value !== "") {
-                this.createListBattery(config.brandSelect.value, event.target.value, 0);
-            }
-        })
     }
 
     static createListBattery(brand, model, apc) {
         let applicableBatteryList = [];
+
         // カメラを取得
         let cameraObj;
         cameraObjects.forEach(camera => {
@@ -54,10 +38,13 @@ export class View {
             }
         });
 
+        let cameraApcPower = Number(cameraObj.powerConsumptionWh) + Number(apc);
+
         batteryObjects.forEach(battery => {
-            // ここでバッテリーのパワーがカメラより大きかったら、applicableBatteryListにpush
-            if(cameraObj.powerConsumptionWh <= battery.getPowerConsumptionWh()) {
-                applicableBatteryList.push(battery);
+            if(cameraApcPower <= battery.getPowerConsumptionWh()) {
+                if(0 < battery.getBatteryLifeH(cameraApcPower)) {
+                    applicableBatteryList.push(battery);
+                }
             }
         });
 
@@ -65,7 +52,12 @@ export class View {
             let listItem = document.createElement("a");
             listItem.setAttribute("href", "#");
             listItem.classList.add("list-group-item", "list-group-item-action")
-            listItem.innerHTML = battery.batteryName;
+            listItem.innerHTML = `
+                <div class="row">
+                    <div class="col-5">${battery.batteryName}</div>
+                    <div class="col-7 text-right">Estimate ${battery.getBatteryLifeH(cameraApcPower)} hours</div>
+                </div> 
+            `;
             listItem.addEventListener("mouseover", (event) => {
                 event.target.classList.add("active");
             });
@@ -77,10 +69,3 @@ export class View {
         });
     }
 }
-{/* <a href="#" class="list-group-item list-group-item-action active">
-Cras justo odio
-</a>
-<a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-<a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-<a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-<a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a> */}
