@@ -48,6 +48,12 @@ export class View {
             }
         });
 
+        applicableBatteryList = applicableBatteryList.sort( (x, y) => {
+            if (x.batteryName < y.batteryName) {return -1;}
+            if (x.batteryName > y.batteryName) {return 1;}
+            return 0;
+        });
+
         applicableBatteryList.forEach(battery => {
             let listItem = document.createElement("a");
             listItem.setAttribute("href", "#");
