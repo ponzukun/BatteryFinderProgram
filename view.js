@@ -17,39 +17,26 @@ export class View {
     }
 
     static createSelectModel(brand) {
-        // モデル名の重複を防ぐ
-        const cameraModels = new Set();
-        cameraObjects.forEach(camera => { 
-            if(brand === camera.brand) cameraModels.add(camera.model);
-        });
+        // ブランドにあるカメラのモデルを取得（オブジェクトで）
+        const cameraModels = cameraObjects.filter(camera => brand === camera.brand);
 
-        for (let model of cameraModels) {
+        cameraModels.forEach(camera => {
             let option = document.createElement("option");
-            option.setAttribute("value", model);
-            option.innerHTML = model;
+            option.setAttribute("value", camera.model);
+            option.innerHTML = camera.model;
             config.modelSelect.append(option);
-        }
+        });
     }
 
     static createListBattery(brand, model, apc) {
         // 選択されているカメラを取得
-        let cameraObj;
-        cameraObjects.forEach(camera => {
-            if(camera.brand == brand && camera.model == model) {
-                cameraObj = camera;
-            }
-        });
+        const cameraObj = cameraObjects.find(camera => camera.brand == brand && camera.model == model);
         
         // 有効なバッテリーを取得
-        let applicableBatteryList = [];
         let cameraApcPower = Number(cameraObj.powerConsumptionWh) + Number(apc);
-        batteryObjects.forEach(battery => {
-            if(cameraApcPower <= battery.getPowerConsumptionWh()) {
-                if(0 < battery.getBatteryLifeH(cameraApcPower)) {
-                    applicableBatteryList.push(battery);
-                }
-            }
-        });
+        let applicableBatteryList = batteryObjects.filter(battery => 
+            cameraApcPower <= battery.getPowerConsumptionWh() && 0 < battery.getBatteryLifeH(cameraApcPower)
+        );
 
         // バッテリーをアルファベット順（昇順）にソート
         applicableBatteryList = applicableBatteryList.sort( (x, y) => {
