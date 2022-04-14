@@ -1,5 +1,5 @@
-import { View } from "/view.js";
-import { config } from "/config.js";
+import { View } from "./view.js";
+import { config } from "./config.js";
 
 View.createSelectBrand();
 

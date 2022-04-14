@@ -1,5 +1,5 @@
-import { config } from "/config.js";
-import { cameraObjects } from "/camera.js";
+import { config } from "./config.js";
+import { cameraObjects } from "./camera.js";
 import { batteryObjects } from "./battery.js";
 
 export class View {
